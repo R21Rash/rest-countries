@@ -13,14 +13,21 @@ const App = () => {
         <Route path="/" element={<AuthPage />} />
 
         <Route
-          path="/home"
+          path="/HomePage"
           element={
             <DashboardTemplate>
               <HomePage />
             </DashboardTemplate>
           }
         />
-        <Route path="/country/:slug" element={<CountryDetailPage />} />
+        <Route
+          path="/country/:slug"
+          element={
+            <DashboardTemplate>
+              <CountryDetailPage />
+            </DashboardTemplate>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -9,7 +9,7 @@ const AvatarMenu = () => {
 
   const handleLogout = async () => {
     await logoutUser();
-    navigate("/"); // ✅ Redirect to homepage or login
+    navigate("/");
   };
 
   return (
