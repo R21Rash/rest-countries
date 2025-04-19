@@ -1,8 +1,16 @@
 import { useState } from "react";
-import { CaretDown, CaretUp } from "@phosphor-icons/react"; // Make sure you have this package installed
+import { CaretDown, CaretUp } from "@phosphor-icons/react";
+import { logoutUser } from "../../../services/auth-service";
+import { useNavigate } from "react-router-dom";
 
 const AvatarMenu = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logoutUser();
+    navigate("/"); // ✅ Redirect to homepage or login
+  };
 
   return (
     <div className="relative">
@@ -36,7 +44,10 @@ const AvatarMenu = () => {
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Support
             </li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500">
+            <li
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
+              onClick={handleLogout}
+            >
               Sign Out
             </li>
           </ul>

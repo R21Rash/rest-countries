@@ -1,20 +1,27 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./index.css"; // Tailwind base
-import DashboardTemplate from "./components/molecules/Layout/DashboardTemplate"; // shared layout
+import "./index.css";
+import DashboardTemplate from "./components/molecules/Layout/DashboardTemplate";
 import HomePage from "./pages/HomePage/page.jsx";
+import AuthPage from "./pages/AuthPage/page.jsx";
+import CountryDetailPage from "./pages/CountryDetail/[slug]";
 
 const App = () => {
   return (
     <Router>
-      <DashboardTemplate>
-        <Routes>
-          <Route path="" element={<HomePage />} />
-          {/* <Route path="/about" element={<AboutPage />} />
-         
-          <Route path="*" element={<NotFound />} /> */}
-        </Routes>
-      </DashboardTemplate>
+      <Routes>
+        <Route path="/" element={<AuthPage />} />
+
+        <Route
+          path="/home"
+          element={
+            <DashboardTemplate>
+              <HomePage />
+            </DashboardTemplate>
+          }
+        />
+        <Route path="/country/:slug" element={<CountryDetailPage />} />
+      </Routes>
     </Router>
   );
 };
