@@ -12,16 +12,20 @@ const SearchAndFilter = ({
 }) => {
   return (
     <CommonCard>
-      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 w-full">
-        <SearchBar value={searchTerm} onChange={onSearchChange} />
-        <FilterDropdown
-          label="Filter by Region"
-          options={regions}
-          value={selectedRegion}
-          onChange={onRegionChange}
-        />
+      <div className="flex flex-col md:flex-row md:items-end gap-6 w-full">
+        <div className="w-full md:w-1/2">
+          <SearchBar value={searchTerm} onChange={onSearchChange} />
+        </div>
+        <div className="w-full md:w-1/3">
+          <FilterDropdown
+            label="Filter by Region"
+            options={regions}
+            value={selectedRegion}
+            onChange={onRegionChange}
+          />
+        </div>
         {children && (
-          <div className="flex items-end justify-end">{children}</div>
+          <div className="w-full md:w-1/6 flex justify-end">{children}</div>
         )}
       </div>
     </CommonCard>

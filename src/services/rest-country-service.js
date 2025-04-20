@@ -33,3 +33,19 @@ export const fetchTheCountryByTranslation = async (string) => {
     throw error;
   }
 };
+
+export const fetchCountriesByName = async (name) => {
+  try {
+    const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch country ");
+    }
+
+    const country = await response.json();
+    return country;
+  } catch (error) {
+    console.error("Error fetching country:", error);
+    throw error;
+  }
+};

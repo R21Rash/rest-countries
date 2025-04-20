@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   fetchAllCountries,
   fetchTheCountryByTranslation,
+  fetchCountriesByName,
 } from "../services/rest-country-service";
 
 export const useFetchAllCountries = () => {
@@ -20,3 +21,9 @@ export const useCountryByTranslation = (countryName) => {
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 };
+
+export const useCountrySearch = (name) =>
+  useQuery(["search-country", name], () => fetchCountriesByName(name), {
+    enabled: !!name, // only run when `name` is not empty
+    staleTime: 5 * 60 * 1000,
+  });

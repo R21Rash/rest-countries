@@ -18,7 +18,7 @@ const AuthPage = () => {
         ? await loginUser(email, password)
         : await registerUser(email, password);
       alert(`✅ ${isLogin ? "Logged in" : "Registered"}: ${res.user.email}`);
-      if (isLogin) navigate("/home");
+      if (isLogin) navigate("/HomePage");
     } catch (error) {
       alert("❌ Auth error: " + error.message);
     }
