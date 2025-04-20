@@ -1,3 +1,4 @@
+// HomePage.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TitleCard from "../../components/molecules/TitleCard/TitleCard";
@@ -11,6 +12,7 @@ import {
 } from "../../hooks/useCountries";
 import Loader from "../../components/Atoms/Loader/Loader";
 import CountryCard from "../../components/molecules/CountryCard/CountryCard";
+import { auth } from "../../firebase";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -19,8 +21,15 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("All");
   const [selectedLanguage, setSelectedLanguage] = useState("All");
+  const [user, setUser] = useState(null);
 
-  // 🔀 Decide query source
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const {
     data: countries,
     isLoading,
@@ -37,7 +46,6 @@ const HomePage = () => {
     setCurrentPage(1);
   }, [searchTerm, selectedRegion, selectedLanguage]);
 
-  // 🧠 Pagination logic
   const paginatedCountries =
     countries?.slice(
       (currentPage - 1) * ITEMS_PER_PAGE,
@@ -95,22 +103,7 @@ const HomePage = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {paginatedCountries.map((country) => (
-          <CountryCard
-            key={country.cca3}
-            country={country}
-            onFavorite={(favCountry) => {
-              const stored = JSON.parse(
-                localStorage.getItem("favorites") || "[]"
-              );
-              const exists = stored.find((c) => c.cca3 === favCountry.cca3);
-              if (!exists) {
-                localStorage.setItem(
-                  "favorites",
-                  JSON.stringify([...stored, favCountry])
-                );
-              }
-            }}
-          />
+          <CountryCard key={country.cca3} country={country} user={user} />
         ))}
       </div>
 

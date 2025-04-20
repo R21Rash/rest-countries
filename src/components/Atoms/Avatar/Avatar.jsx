@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CaretDown, CaretUp } from "@phosphor-icons/react";
 import { logoutUser } from "../../../services/auth-service";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase";
 
 const AvatarMenu = () => {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleLogout = async () => {
     await logoutUser();
     navigate("/");
+  };
+
+  const getInitial = () => {
+    if (!user?.email) return "U";
+    return user.email.charAt(0).toUpperCase();
   };
 
   return (
@@ -18,20 +32,24 @@ const AvatarMenu = () => {
         onClick={() => setOpen(!open)}
         className="flex items-center space-x-2"
       >
-        <img
-          src="https://randomuser.me/api/portraits/men/32.jpg"
-          alt="User avatar"
-          className="w-8 h-8 rounded-full border-2 border-white"
-        />
-        <span className="hidden sm:block font-medium">Musharof</span>
+        {/* Always show letter avatar */}
+        <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-semibold border-2 border-white">
+          {getInitial()}
+        </div>
+
+        <span className="hidden sm:block font-medium">
+          {user?.displayName || user?.email?.split("@")[0] || "User"}
+        </span>
         {open ? <CaretUp size={16} /> : <CaretDown size={16} />}
       </button>
 
       {open && (
         <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg border rounded z-50">
           <div className="px-4 py-2 text-sm">
-            <p className="font-semibold text-gray-800">Musharof Chowdhury</p>
-            <p className="text-gray-500">randomuser@pinjoo.com</p>
+            <p className="font-semibold text-gray-800">
+              {user?.displayName || "Anonymous User"}
+            </p>
+            <p className="text-gray-500">{user?.email || "No email found"}</p>
           </div>
           <hr />
           <ul className="text-sm text-gray-700">

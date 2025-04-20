@@ -25,9 +25,9 @@ const CountryDetailPage = () => {
 
   if (isLoading)
     return (
-      <p className="text-center">
+      <div className="text-center">
         <Loader />
-      </p>
+      </div>
     );
   if (isError)
     return <p className="text-center text-red-500">Something went wrong 😢</p>;

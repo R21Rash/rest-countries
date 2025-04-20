@@ -6,39 +6,45 @@ import HomePage from "./pages/HomePage/page.jsx";
 import AuthPage from "./pages/AuthPage/page.jsx";
 import CountryDetailPage from "./pages/CountryDetail/[slug]";
 import FavouritePage from "./pages/FavouritePage/page.jsx";
+import { Toaster } from "sonner"; // ✅ Import toast system
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<AuthPage />} />
+    <>
+      <Toaster position="top-center" richColors /> {/* ✅ Toast container */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
 
-        <Route
-          path="/HomePage"
-          element={
-            <DashboardTemplate>
-              <HomePage />
-            </DashboardTemplate>
-          }
-        />
-        <Route
-          path="/country/:slug"
-          element={
-            <DashboardTemplate>
-              <CountryDetailPage />
-            </DashboardTemplate>
-          }
-        />
-        <Route
-          path="/favourites"
-          element={
-            <DashboardTemplate>
-              <FavouritePage />
-            </DashboardTemplate>
-          }
-        />
-      </Routes>
-    </Router>
+          <Route
+            path="/HomePage"
+            element={
+              <DashboardTemplate>
+                <HomePage />
+              </DashboardTemplate>
+            }
+          />
+
+          <Route
+            path="/country/:slug"
+            element={
+              <DashboardTemplate>
+                <CountryDetailPage />
+              </DashboardTemplate>
+            }
+          />
+
+          <Route
+            path="/favourites"
+            element={
+              <DashboardTemplate>
+                <FavouritePage />
+              </DashboardTemplate>
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
