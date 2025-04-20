@@ -11,6 +11,9 @@ export default {
           blue: "#2563eb", // tailwind blue-600
         },
       },
+      animation: {
+        "spin-slow": "spin 2s linear infinite",
+      },
     },
   },
   plugins: [],

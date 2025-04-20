@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useCountryByTranslation } from "../../hooks/useCountries";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import CommonCard from "../../components/Atoms/CommonCard/CommonCard";
+import Loader from "../../components/Atoms/Loader/Loader";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -19,9 +20,15 @@ L.Icon.Default.mergeOptions({
 
 const CountryDetailPage = () => {
   const { slug } = useParams();
-  const { data, isLoading, isError } = useCountryByTranslation(slug);
+  const formattedSlug = slug.replace(/-/g, " ");
+  const { data, isLoading, isError } = useCountryByTranslation(formattedSlug);
 
-  if (isLoading) return <p className="text-center">Loading country data...</p>;
+  if (isLoading)
+    return (
+      <p className="text-center">
+        <Loader />
+      </p>
+    );
   if (isError)
     return <p className="text-center text-red-500">Something went wrong 😢</p>;
 
