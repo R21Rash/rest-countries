@@ -36,20 +36,6 @@ const Header = () => {
         </NavLink>
 
         <NavLink
-          to="/country/germany"
-          title="Countries"
-          className={({ isActive }) =>
-            `transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
-              isActive
-                ? "text-blue-600 dark:text-blue-400"
-                : "text-gray-600 dark:text-gray-300"
-            }`
-          }
-        >
-          <GlobeHemisphereWest weight="regular" />
-        </NavLink>
-
-        <NavLink
           to="/favourites"
           title="Favourites"
           className={({ isActive }) =>

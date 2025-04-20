@@ -6,16 +6,16 @@ import HomePage from "./pages/HomePage/page.jsx";
 import AuthPage from "./pages/AuthPage/page.jsx";
 import CountryDetailPage from "./pages/CountryDetail/[slug]";
 import FavouritePage from "./pages/FavouritePage/page.jsx";
-import { Toaster } from "sonner"; // ✅ Import toast system
+import ContactPage from "./pages/ContactUs/page";
+import { Toaster } from "sonner";
 
 const App = () => {
   return (
     <>
-      <Toaster position="top-center" richColors /> {/* ✅ Toast container */}
+      <Toaster position="top-center" richColors />
       <Router>
         <Routes>
           <Route path="/" element={<AuthPage />} />
-
           <Route
             path="/HomePage"
             element={
@@ -24,7 +24,6 @@ const App = () => {
               </DashboardTemplate>
             }
           />
-
           <Route
             path="/country/:slug"
             element={
@@ -33,12 +32,20 @@ const App = () => {
               </DashboardTemplate>
             }
           />
-
           <Route
             path="/favourites"
             element={
               <DashboardTemplate>
                 <FavouritePage />
+              </DashboardTemplate>
+            }
+          />
+          contact
+          <Route
+            path="/contact"
+            element={
+              <DashboardTemplate>
+                <ContactPage />
               </DashboardTemplate>
             }
           />

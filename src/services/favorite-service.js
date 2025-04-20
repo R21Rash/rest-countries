@@ -10,7 +10,6 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 
-// 🛠 Normalize country structure consistently for both add/remove
 const normalizeCountry = (country) => ({
   name: country.name?.common || country.name || "Unknown",
   capital: Array.isArray(country.capital)
@@ -21,14 +20,12 @@ const normalizeCountry = (country) => ({
   cca3: country.cca3 || "",
 });
 
-// ✅ Add to Firestore Favorites
 export const addToFavorites = async (userId, country) => {
   const userRef = doc(db, "favorites", userId);
   const normalized = normalizeCountry(country);
   await setDoc(userRef, { countries: arrayUnion(normalized) }, { merge: true });
 };
 
-// ✅ Remove from Firestore Favorites (must match exact structure)
 export const removeFromFavorites = async (userId, country) => {
   const userRef = doc(db, "favorites", userId);
   const snapshot = await getDoc(userRef);
@@ -44,7 +41,6 @@ export const removeFromFavorites = async (userId, country) => {
   }
 };
 
-// ✅ Fetch Favorites (one-time)
 export const fetchFavorites = async (userId) => {
   const userRef = doc(db, "favorites", userId);
   const docSnap = await getDoc(userRef);

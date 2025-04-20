@@ -6,54 +6,44 @@ import {
   signInWithGoogle,
 } from "../../services/auth-service";
 import { useNavigate } from "react-router-dom";
-import Toast from "../../components/Atoms/Toast/Toast.jsx";
+import { toast, Toaster } from "sonner";
 
 const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
-  const [toast, setToast] = useState(null);
 
   const handleSubmit = async () => {
     try {
       const res = isLogin
         ? await loginUser(email, password)
         : await registerUser(email, password);
-      setToast({
-        type: "success",
-        message: isLogin ? "Login successful!" : "Registered successfully!",
-      });
+      toast.success(isLogin ? "Login successful!" : "Registered successfully!");
       if (isLogin) {
         setTimeout(() => navigate("/HomePage"), 1000);
       }
     } catch (error) {
-      setToast({ type: "error", message: "Login failed!" });
+      toast.error("Login failed!");
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithGoogle();
-      setToast({ type: "success", message: "Login with Google successful!" });
+      await signInWithGoogle();
+      toast.success("Login with Google successful!");
       setTimeout(() => navigate("/HomePage"), 1000);
     } catch (error) {
-      setToast({ type: "error", message: "Google login failed!" });
+      toast.error("Google login failed!");
     }
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* ✅ Toast */}
-      {toast && (
-        <Toast
-          type={toast.type}
-          message={toast.message}
-          onClose={() => setToast(null)}
-        />
-      )}
+      {/* ✅ Sonner Toast Host */}
+      <Toaster richColors position="top-center" />
 
-      {/* 🔲 Card */}
+      {/* 🔲 Auth Card */}
       <div className="relative z-10 w-full max-w-md bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-10">
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">🌍</div>

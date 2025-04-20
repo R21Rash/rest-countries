@@ -33,7 +33,7 @@ const FavouritePage = () => {
   }, []);
 
   return (
-    <div className="p-6">
+    <>
       <TitleCard title="Favourite Countries 💖" />
 
       {loading ? (
@@ -59,7 +59,7 @@ const FavouritePage = () => {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
