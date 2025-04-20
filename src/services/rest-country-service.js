@@ -49,3 +49,39 @@ export const fetchCountriesByName = async (name) => {
     throw error;
   }
 };
+
+export const fetchCountriesByRegion = async (region) => {
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/region/${region}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch country by region ");
+    }
+
+    const country = await response.json();
+    return country;
+  } catch (error) {
+    console.error("Error fetching country by region:", error);
+    throw error;
+  }
+};
+
+export const fetchCountriesByLanguage = async (language) => {
+  try {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/lang/${language}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch country by language ");
+    }
+
+    const country = await response.json();
+    return country;
+  } catch (error) {
+    console.error("Error fetching country by language:", error);
+    throw error;
+  }
+};

@@ -7,26 +7,44 @@ const SearchAndFilter = ({
   onSearchChange,
   selectedRegion,
   onRegionChange,
-  regions,
+  regions = [],
+  selectedLanguage,
+  onLanguageChange,
+  languages = [],
   children,
 }) => {
   return (
     <CommonCard>
-      <div className="flex flex-col md:flex-row md:items-end gap-6 w-full">
-        <div className="w-full md:w-1/2">
-          <SearchBar value={searchTerm} onChange={onSearchChange} />
+      <div className="w-full">
+        <div className="flex flex-wrap md:flex-nowrap items-end gap-4">
+          {/* 🔍 Search */}
+          <div className="flex-grow min-w-[180px] md:w-[240px]">
+            <SearchBar value={searchTerm} onChange={onSearchChange} />
+          </div>
+
+          {/* 🌍 Region */}
+          <div className="flex-grow min-w-[160px] md:w-[200px]">
+            <FilterDropdown
+              label="Filter by Region"
+              options={regions}
+              value={selectedRegion}
+              onChange={onRegionChange}
+            />
+          </div>
+
+          {/* 🗣️ Language */}
+          <div className="flex-grow min-w-[160px] md:w-[200px]">
+            <FilterDropdown
+              label="Filter by Language"
+              options={languages}
+              value={selectedLanguage}
+              onChange={onLanguageChange}
+            />
+          </div>
+
+          {/* ➕ Optional */}
+          {children && <div className="flex-shrink-0">{children}</div>}
         </div>
-        <div className="w-full md:w-1/3">
-          <FilterDropdown
-            label="Filter by Region"
-            options={regions}
-            value={selectedRegion}
-            onChange={onRegionChange}
-          />
-        </div>
-        {children && (
-          <div className="w-full md:w-1/6 flex justify-end">{children}</div>
-        )}
       </div>
     </CommonCard>
   );
