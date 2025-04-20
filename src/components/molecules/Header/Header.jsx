@@ -1,4 +1,11 @@
-import { House, GlobeHemisphereWest, Info, Phone } from "@phosphor-icons/react";
+import { NavLink } from "react-router-dom";
+import {
+  House,
+  GlobeHemisphereWest,
+  Info,
+  Phone,
+  Heart,
+} from "@phosphor-icons/react";
 import AvatarMenu from "../../Atoms/Avatar/Avatar";
 
 const Header = () => {
@@ -7,41 +14,54 @@ const Header = () => {
       {/* Left: Logo */}
       <div
         className="text-xl font-bold tracking-tight text-gray-800 dark:text-white"
-        style={{ fontFamily: "'Poppins ', cursive" }}
+        style={{ fontFamily: "'Poppins', cursive" }}
       >
         🌍 REST Countries
       </div>
 
       {/* Center: Nav */}
       <nav className="flex gap-10 items-center text-gray-600 dark:text-gray-300 text-[22px]">
-        <a
-          href="/"
+        <NavLink
+          to="/HomePage"
           title="Home"
-          className="hover:text-blue-600 dark:hover:text-blue-400 transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          className={({ isActive }) =>
+            `transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
+              isActive
+                ? "text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-300"
+            }`
+          }
         >
           <House weight="regular" />
-        </a>
-        <a
-          href="/countries"
-          title="Countries"
-          className="hover:text-blue-600 dark:hover:text-blue-400 transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+        </NavLink>
+
+        <NavLink
+          to="/favourites"
+          title="Favourites"
+          className={({ isActive }) =>
+            `transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
+              isActive
+                ? "text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-300"
+            }`
+          }
         >
-          <GlobeHemisphereWest weight="regular" />
-        </a>
-        <a
-          href="/about"
-          title="About"
-          className="hover:text-blue-600 dark:hover:text-blue-400 transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-        >
-          <Info weight="regular" />
-        </a>
-        <a
-          href="/contact"
+          <Heart weight="regular" />
+        </NavLink>
+
+        <NavLink
+          to="/contact"
           title="Contact"
-          className="hover:text-blue-600 dark:hover:text-blue-400 transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          className={({ isActive }) =>
+            `transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
+              isActive
+                ? "text-blue-600 dark:text-blue-400"
+                : "text-gray-600 dark:text-gray-300"
+            }`
+          }
         >
           <Phone weight="regular" />
-        </a>
+        </NavLink>
       </nav>
 
       {/* Right: Avatar */}
