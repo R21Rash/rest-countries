@@ -39,9 +39,12 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-200 via-salute-200 to-blue-300 animate-gradient-x">
       {/* ✅ Sonner Toast Host */}
       <Toaster richColors position="top-center" />
+
+      {/* 🔲 Background Blur Effect */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.4),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.2),transparent_50%)] pointer-events-none" />
 
       {/* 🔲 Auth Card */}
       <div className="relative z-10 w-full max-w-md bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-10">
@@ -88,11 +91,10 @@ const AuthPage = () => {
         />
 
         <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
-          </div>
-          <div className="relative text-center">
-            <span className="bg-white px-2 text-sm text-gray-500">OR</span>
+          <div className="relative flex items-center my-6">
+            <div className="flex-grow border-t border-gray-300" />
+            <span className="mx-4 text-sm text-gray-500 font-medium">OR</span>
+            <div className="flex-grow border-t border-gray-300" />
           </div>
         </div>
 
