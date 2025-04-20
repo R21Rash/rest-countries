@@ -10,6 +10,7 @@ import {
   useCountryByLanguage,
 } from "../../hooks/useCountries";
 import Loader from "../../components/Atoms/Loader/Loader";
+import CountryCard from "../../components/molecules/CountryCard/CountryCard";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -93,30 +94,24 @@ const HomePage = () => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-        {paginatedCountries.map((country) => {
-          const slug = country.name.common.toLowerCase().replace(/\s+/g, "-");
-
-          return (
-            <Link to={`/country/${slug}`} key={country.cca3}>
-              <div className="p-4 bg-white shadow-md rounded-md transition hover:shadow-lg">
-                <img
-                  src={country.flags?.png}
-                  alt={country.name.common}
-                  className="w-full h-32 object-cover mb-3 rounded"
-                />
-                <h3 className="text-lg font-bold text-gray-800">
-                  {country.name.common}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  Capital: {country.capital?.[0] || "N/A"}
-                </p>
-                <p className="text-sm text-gray-600">
-                  Population: {country.population.toLocaleString()}
-                </p>
-              </div>
-            </Link>
-          );
-        })}
+        {paginatedCountries.map((country) => (
+          <CountryCard
+            key={country.cca3}
+            country={country}
+            onFavorite={(favCountry) => {
+              const stored = JSON.parse(
+                localStorage.getItem("favorites") || "[]"
+              );
+              const exists = stored.find((c) => c.cca3 === favCountry.cca3);
+              if (!exists) {
+                localStorage.setItem(
+                  "favorites",
+                  JSON.stringify([...stored, favCountry])
+                );
+              }
+            }}
+          />
+        ))}
       </div>
 
       <Pagination

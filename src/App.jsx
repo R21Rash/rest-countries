@@ -5,6 +5,7 @@ import DashboardTemplate from "./components/molecules/Layout/DashboardTemplate";
 import HomePage from "./pages/HomePage/page.jsx";
 import AuthPage from "./pages/AuthPage/page.jsx";
 import CountryDetailPage from "./pages/CountryDetail/[slug]";
+import FavouritePage from "./pages/FavouritePage/page.jsx";
 
 const App = () => {
   return (
@@ -25,6 +26,14 @@ const App = () => {
           element={
             <DashboardTemplate>
               <CountryDetailPage />
+            </DashboardTemplate>
+          }
+        />
+        <Route
+          path="/favourites"
+          element={
+            <DashboardTemplate>
+              <FavouritePage />
             </DashboardTemplate>
           }
         />

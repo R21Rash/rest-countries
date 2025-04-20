@@ -1,5 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { House, GlobeHemisphereWest, Info, Phone } from "@phosphor-icons/react";
+import {
+  House,
+  GlobeHemisphereWest,
+  Info,
+  Phone,
+  Heart,
+} from "@phosphor-icons/react";
 import AvatarMenu from "../../Atoms/Avatar/Avatar";
 
 const Header = () => {
@@ -44,8 +50,8 @@ const Header = () => {
         </NavLink>
 
         <NavLink
-          to="/about"
-          title="About"
+          to="/favourites"
+          title="Favourites"
           className={({ isActive }) =>
             `transition-all p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 ${
               isActive
@@ -54,7 +60,7 @@ const Header = () => {
             }`
           }
         >
-          <Info weight="regular" />
+          <Heart weight="regular" />
         </NavLink>
 
         <NavLink
