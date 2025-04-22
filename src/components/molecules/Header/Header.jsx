@@ -7,16 +7,22 @@ import {
   Heart,
 } from "@phosphor-icons/react";
 import AvatarMenu from "../../Atoms/Avatar/Avatar";
+import Logo from "../../../assets/logo.png";
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-8 py-3 border-b bg-white shadow-sm dark:bg-brand-dark dark:text-white transition-colors duration-300">
       {/* Left: Logo */}
       <div
-        className="text-xl font-bold tracking-tight text-gray-800 dark:text-white"
+        className="text-xl flex  flex-row  font-bold tracking-tight text-gray-800 dark:text-white"
         style={{ fontFamily: "'Poppins', cursive" }}
       >
-        🌍 REST Countries
+        <img
+          src={Logo} // Replace with your image path
+          alt="Logo"
+          className="w-6 h-6 object-contain"
+        />{" "}
+        REST Countries
       </div>
 
       {/* Center: Nav */}
