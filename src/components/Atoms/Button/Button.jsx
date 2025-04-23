@@ -1,3 +1,4 @@
+import React from "react";
 const variantStyles = {
   primary: "bg-blue-600 text-white hover:bg-blue-700",
   outlinePrimary: "border border-blue-600 text-blue-600 hover:bg-blue-50",
@@ -9,7 +10,7 @@ const variantStyles = {
 
 const Button = ({
   label,
-  icon, // 👈 New icon prop
+  icon,
   onClick,
   className = "",
   variant = "primary",

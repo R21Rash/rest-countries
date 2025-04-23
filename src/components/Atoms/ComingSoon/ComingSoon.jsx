@@ -7,7 +7,10 @@ const ComingSoon = ({
 }) => {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-8">
-      <div className="text-5xl mb-4 text-yellow-500 animate-bounce">
+      <div
+        className="text-5xl mb-4 text-yellow-500 animate-bounce"
+        data-testid="hammer-icon-wrapper"
+      >
         <Hammer weight="fill" size={60} />
       </div>
       <h1 className="text-2xl font-bold text-gray-800 dark:text-white">

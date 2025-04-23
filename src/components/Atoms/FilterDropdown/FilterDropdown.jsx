@@ -1,11 +1,17 @@
+import React from "react";
 const FilterDropdown = ({ label, options = [], onChange, value }) => {
+  const selectId = label.toLowerCase().replace(/\s+/g, "-") + "-select";
   return (
     <div className="w-full">
-      <label className="block mb-2 text-base font-semibold text-gray-700">
+      <label
+        htmlFor={selectId}
+        className="block mb-2 text-base font-semibold text-gray-700"
+      >
         {label}
       </label>
       <div className="relative">
         <select
+          id={selectId}
           value={value}
           onChange={onChange}
           className="w-full appearance-none px-5 py-3 pr-10 border border-gray-300 text-gray-700 bg-white rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"

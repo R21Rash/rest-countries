@@ -1,3 +1,4 @@
+import React from "react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 
 const SearchBar = ({ value, onChange }) => {

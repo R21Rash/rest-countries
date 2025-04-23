@@ -9,7 +9,7 @@ const typeStyles = {
 
 const Toast = ({ type = "success", message, onClose }) => {
   useEffect(() => {
-    const timer = setTimeout(onClose, 3000); // 3 seconds
+    const timer = setTimeout(onClose, 3000);
     return () => clearTimeout(timer);
   }, [onClose]);
 

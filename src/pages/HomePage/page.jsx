@@ -78,7 +78,7 @@ const HomePage = () => {
 
   return (
     <>
-      <TitleCard title="Explore Countries 🌍" />
+      <TitleCard title="Explore Countries " />
 
       <SearchAndFilter
         searchTerm={searchTerm}
