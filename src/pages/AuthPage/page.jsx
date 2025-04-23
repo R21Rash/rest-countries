@@ -14,17 +14,35 @@ const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
 
+  const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
   const handleSubmit = async () => {
+    if (!isValidEmail(email)) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters.");
+      return;
+    }
+
     try {
       const res = isLogin
         ? await loginUser(email, password)
         : await registerUser(email, password);
-      toast.success(isLogin ? "Login successful!" : "Registered successfully!");
-      if (isLogin) {
-        setTimeout(() => navigate("/HomePage"), 1000);
-      }
+
+      toast.success(
+        isLogin ? "Login successful!" : "Account created successfully!"
+      );
+
+      setTimeout(() => {
+        isLogin ? navigate("/HomePage") : setIsLogin(true); // go to login screen after register
+      }, 1000);
     } catch (error) {
-      toast.error("Login failed!");
+      // Show error from backend if available
+      const msg = error?.response?.data?.message || "Something went wrong!";
+      toast.error(msg);
     }
   };
 
@@ -40,13 +58,9 @@ const AuthPage = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-200 via-salute-200 to-blue-300 animate-gradient-x">
-      {/* ✅ Sonner Toast Host */}
       <Toaster richColors position="top-center" />
-
-      {/* 🔲 Background Blur Effect */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.4),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.2),transparent_50%)] pointer-events-none" />
 
-      {/* 🔲 Auth Card */}
       <div className="relative z-10 w-full max-w-md bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl p-8 sm:p-10">
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">🌍</div>
