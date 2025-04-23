@@ -29,7 +29,7 @@ A modern, fast, and responsive React web application to explore country data usi
 
 ```bash
 # Clone the repository
-git clone https://github.com/R21Rash/rest-countries-app.git
+https://github.com/SE1020-IT2070-OOP-DSA-25/af-2-R21Rash.git
 
 # Navigate to the project directory
 cd rest-countries-app
