@@ -1,12 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CountryCard = ({ country }) => {
+  const slug = country.name?.common?.toLowerCase().replace(/\s+/g, "-");
+
   return (
     <Link to={`/country/${slug}`}>
       <div className="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
         <img
           src={country.flag}
-          alt={`${country.name} flag`}
+          alt={`${country.name?.common || country.name} flag`}
           className="w-full h-32 object-cover rounded-md mb-3"
         />
         <h3 className="text-lg font-bold text-gray-800">
@@ -15,7 +18,7 @@ const CountryCard = ({ country }) => {
         <p className="text-sm text-gray-600">
           Capital:{" "}
           {Array.isArray(country.capital)
-            ? country.capital?.[0]
+            ? country.capital[0]
             : country.capital || "N/A"}
         </p>
         <p className="text-sm text-gray-600">
