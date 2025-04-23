@@ -1,12 +1,44 @@
-# React + Vite
+# REST Countries Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fast, and responsive React web application to explore country data using the [REST Countries API](https://restcountries.com/). Built with [React](https://reactjs.org/) and [Vite](https://vitejs.dev/) for ultra-fast development and optimized production builds.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- View country information (name, capital, population, region, flag, etc.)
+- Search countries by name
+- Filter by region or language
+- Save favorites with localStorage or Firebase
+- Fully responsive and mobile-friendly UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+- **Frontend:** React 18 + Vite
+- **Styling:** Tailwind CSS
+- **Routing:** React Router
+- **Icons:** Phosphor Icons
+- **State Management:** React Hooks + Context
+- **Auth & Storage (optional):** Firebase Authentication + Firestore
+
+---
+
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/R21Rash/rest-countries-app.git
+
+# Navigate to the project directory
+cd rest-countries-app
+
+# Install dependencies using your preferred package manager
+npm install
+# or
+pnpm install
+---
+##  Test
+npm test
+```
