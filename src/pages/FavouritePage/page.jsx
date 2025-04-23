@@ -34,7 +34,7 @@ const FavouritePage = () => {
 
   return (
     <>
-      <TitleCard title="Favourite Countries 💖" />
+      <TitleCard title="Favourite Countries " />
 
       {loading ? (
         <div className="flex justify-center items-center h-60">
@@ -46,7 +46,7 @@ const FavouritePage = () => {
         </div>
       ) : favorites.length === 0 ? (
         <div className="text-center text-gray-500 mt-10 text-lg">
-          You haven’t added any favorites yet 💔
+          You haven’t added any favorites yet
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

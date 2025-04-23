@@ -30,13 +30,13 @@ const CountryDetailPage = () => {
       </div>
     );
   if (isError)
-    return <p className="text-center text-red-500">Something went wrong 😢</p>;
+    return <p className="text-center text-red-500">Something went wrong </p>;
 
   const country = data?.[0]; // API returns array
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* 🌍 Flag and name centered */}
+      {/* Flag and name centered */}
       <div className="text-center mb-8">
         <img
           src={country.flags.png}
@@ -47,7 +47,7 @@ const CountryDetailPage = () => {
         <p className="text-gray-600 italic">{country.name.official}</p>
       </div>
 
-      {/* ✅ Main grid layout with 2/3 + 1/3 split */}
+      {/* Main grid layout with 2/3 + 1/3 split */}
       <div className="grid md:grid-cols-3 gap-8">
         {/* Left: Country info */}
         <div className="md:col-span-2 space-y-4">
@@ -100,7 +100,7 @@ const CountryDetailPage = () => {
             </div>
           </div>
 
-          {/* 🗺️ Map */}
+          {/*  Map */}
           {country.latlng && (
             <div>
               <h2 className="text-lg font-semibold mb-2">Location on Map</h2>
@@ -121,7 +121,7 @@ const CountryDetailPage = () => {
             </div>
           )}
 
-          {/* 🛡️ Coat of Arms */}
+          {/*  Coat of Arms */}
           {country.coatOfArms?.png && (
             <div className="mt-10">
               <h2 className="text-lg font-semibold mb-2">Coat of Arms</h2>
@@ -134,7 +134,7 @@ const CountryDetailPage = () => {
           )}
         </div>
 
-        {/* Right: 🌐 Translations */}
+        {/* Right:  Translations */}
         <div>
           <h2 className="text-lg font-semibold mb-3">🌐 Translations</h2>
           <CommonCard>
