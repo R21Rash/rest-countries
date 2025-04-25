@@ -5,6 +5,7 @@ import { listenToFavorites } from "../../services/favorite-service";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "../../components/Atoms/Loader/Loader";
+import { Heart } from "@phosphor-icons/react";
 
 const FavouritePage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -19,13 +20,13 @@ const FavouritePage = () => {
           user.uid,
           (updatedFavorites) => {
             setFavorites(updatedFavorites);
-            setLoading(false); // ✅ Set loading to false after data comes in
+            setLoading(false);
           }
         );
         return () => stopListening();
       } else {
         setIsAuthenticated(false);
-        setLoading(false); // ✅ Stop loading even if user is not signed in
+        setLoading(false);
       }
     });
 
@@ -42,11 +43,19 @@ const FavouritePage = () => {
         </div>
       ) : !isAuthenticated ? (
         <div className="text-center text-gray-500 mt-10 text-lg">
-          Please sign in to see your favorite countries 🔒
+          Please sign in to view your favorite countries 🔒
         </div>
       ) : favorites.length === 0 ? (
-        <div className="text-center text-gray-500 mt-10 text-lg">
-          You haven’t added any favorites yet
+        <div className="text-center text-gray-500 mt-16 flex flex-col items-center justify-center">
+          <Heart
+            size={48}
+            weight="fill"
+            className="text-red-400 animate-pulse mb-4"
+          />
+          <p className="text-xl font-medium">No favorites yet!</p>
+          <p className="text-sm text-gray-400 mt-1">
+            Start exploring countries and click the ❤️ to save them here.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
