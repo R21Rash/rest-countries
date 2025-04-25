@@ -1,4 +1,3 @@
-// CountryCard.jsx
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, HeartStraight } from "@phosphor-icons/react";
@@ -14,8 +13,10 @@ import { toast } from "sonner";
 
 const CountryCard = ({ country, isFavoritePage = false, onUnfavorite }) => {
   const name = country.name?.common || country.name || "Unknown";
-  const capital = country.capital?.[0] || country.capital || "N/A";
-  const flag = country.flags?.png || country.flag;
+  const capital = Array.isArray(country.capital)
+    ? country.capital[0]
+    : country.capital || "N/A";
+  const flag = country.flags?.png || country.flag || "";
   const population = country.population || 0;
   const cca3 = country.cca3;
   const slug = name.toLowerCase().replace(/\s+/g, "-");
@@ -43,15 +44,15 @@ const CountryCard = ({ country, isFavoritePage = false, onUnfavorite }) => {
 
   const handleFavorite = async (e) => {
     e.preventDefault();
-    if (!user) return alert("Login required to favorite!");
 
-    const favCountry = {
-      name,
-      capital,
-      population,
-      flag,
-      cca3,
-    };
+    if (!user) {
+      toast.warning("Please login to add favorites!");
+      setTimeout(() => {
+        window.location.href = "/auth";
+      }, 1500);
+      return;
+    }
+    const favCountry = { name, capital, population, flag, cca3 };
 
     try {
       if (isFavorited) {
@@ -68,6 +69,7 @@ const CountryCard = ({ country, isFavoritePage = false, onUnfavorite }) => {
       }
     } catch (err) {
       console.error("Error updating favorites:", err);
+      toast.error("Something went wrong while updating favorites.");
     }
   };
 
@@ -82,18 +84,10 @@ const CountryCard = ({ country, isFavoritePage = false, onUnfavorite }) => {
 
         <div className="flex justify-between items-start">
           <div className="pr-2">
-            <h3 className="text-lg font-bold text-gray-800">
-              {country.name?.common || country.name}
-            </h3>
+            <h3 className="text-lg font-bold text-gray-800">{name}</h3>
+            <p className="text-sm text-gray-600">Capital: {capital}</p>
             <p className="text-sm text-gray-600">
-              Capital:{" "}
-              {Array.isArray(country.capital)
-                ? country.capital?.[0]
-                : country.capital || "N/A"}
-            </p>
-            <p className="text-sm text-gray-600">
-              Population:{" "}
-              {country.population?.toLocaleString?.() || country.population}
+              Population: {population.toLocaleString()}
             </p>
           </div>
 

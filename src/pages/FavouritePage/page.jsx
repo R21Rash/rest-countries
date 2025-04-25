@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CountryCard from "../../components/molecules/CountryCard/CountryCard";
 import TitleCard from "../../components/molecules/TitleCard/TitleCard";
 import { listenToFavorites } from "../../services/favorite-service";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "../../components/Atoms/Loader/Loader";
-import { Heart } from "@phosphor-icons/react";
+import { Heart, Lock, ArrowLeft } from "@phosphor-icons/react";
+import Button from "../../components/Atoms/Button/Button";
 
 const FavouritePage = () => {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,8 +45,24 @@ const FavouritePage = () => {
           <Loader />
         </div>
       ) : !isAuthenticated ? (
-        <div className="text-center text-gray-500 mt-10 text-lg">
-          Please sign in to view your favorite countries 🔒
+        <div className="flex flex-col items-center justify-center text-center mt-20 text-gray-500">
+          {/* 🔒 Lock Icon */}
+          <Lock size={60} weight="duotone" className="text-gray-400 mb-6" />
+
+          <p className="text-xl font-semibold mb-2">
+            Please sign in to view your favorite countries
+          </p>
+
+          {/* Buttons */}
+          <div className="flex gap-4 mt-6">
+            <Button
+              icon={<ArrowLeft size={18} />} // ✅ Correct way
+              label="Back to Home"
+              variant="outlineGray"
+              onClick={() => navigate("/HomePage")}
+            />
+            <Button label="Login" onClick={() => navigate("/auth")} />
+          </div>
         </div>
       ) : favorites.length === 0 ? (
         <div className="text-center text-gray-500 mt-16 flex flex-col items-center justify-center">
